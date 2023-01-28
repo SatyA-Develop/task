@@ -1,17 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Loading from "../Loading/Loading";
 import "./Edit.css";
 
 const Edit = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const[isloading,setIsLoading] = useState(true)
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true)
     axios.get(`http://localhost:3003/users/${id}`).then((res) => {
+      setIsLoading(false)
       setName(res.data.name);
       setEmail(res.data.email);
       setPhone(res.data.phone);
@@ -34,7 +38,9 @@ const Edit = () => {
 
   return (
     <div className="edit-page">
-      <form action="">
+     {
+      isloading ? <Loading/> : <div>
+         <form action="">
         <input
           type="text"
           placeholder="Name"
@@ -57,6 +63,8 @@ const Edit = () => {
         <Link to={"/"}>Back to home</Link>
       </form>
       
+      </div>
+     }
     </div>
   );
 };

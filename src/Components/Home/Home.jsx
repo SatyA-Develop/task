@@ -5,12 +5,16 @@ import "./Home.css";
 import { MdDeleteForever } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import { AiOutlineRead } from "react-icons/ai";
+import Loading from "../Loading/Loading";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
+  const[loading,setloading] = useState(true)
 
   const loadUsers = () => {
+    setloading(true)
     axios.get("http://localhost:3003/users").then((res) => {
+      setloading(false)
       setUsers(res.data.reverse());
     });
   };
@@ -24,7 +28,8 @@ const Home = () => {
 
   return (
     <div className="table-wrapper">
-      <table>
+      {
+        loading ? <Loading/> : <table>
         <thead>
           <tr>
             <th>#</th>
@@ -60,6 +65,7 @@ const Home = () => {
           })}
         </tbody>
       </table>
+      }
     </div>
   );
 };
