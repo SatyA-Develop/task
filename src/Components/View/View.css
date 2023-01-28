@@ -1,0 +1,17 @@
+.view-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8rem;
+    flex-direction: column;
+}
+
+.view-page :nth-child(1){
+    font-size: 32px;
+}
+.view-page :nth-child(2){
+    font-size: 25px;
+}
+.view-page :nth-child(3){
+    font-size: 20px;
+}
